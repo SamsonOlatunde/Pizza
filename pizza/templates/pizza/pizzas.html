@@ -1,0 +1,35 @@
+{% extends "pizza/base.html" %}
+{% block title %} Get More Pizza Here {% endblock %}
+
+
+{% load widget_tweaks %}
+{% block content %}
+<div class="container">
+<br>
+  <h1>Order More Pizza</h1>
+    <br>
+<h4>{{ note }}</h4>
+ <div class="form-group">
+    <form action="{% url 'pizzas' %}" method="POST">
+        {% csrf_token %}
+        {{ formset.management_form }}
+        {% for form in formset %}
+
+            {{ form }}
+            {{ form.label_tag }}
+            {% render_field field class='form-control' %}
+
+        <br>
+        {% endfor %}
+
+        <br>
+        <input type="submit" value="Order More Pizza">
+    </form>
+ </div>
+</div>
+ {% endblock %}
+
+
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+{% extends "pizza/base.html" %}
+{% block title %} Edit Order {% endblock %}
+
+
+{% load widget_tweaks %}
+{% block content %}
+<div class="container">
+<br>
+<h1>Edit Pizza</h1>
+
+<h2>{{ note }}</h2>
+
+<br>
+<form action="{% url 'edit_order' pizza.id %}" method="POST">
+    {% csrf_token %}
+    {% for field in pizzaform %}
+    <div class="form-group">
+    {{ field.errors }}
+    {{ field.label_tag }}
+    {% render_field field class='form-control' %}
+    </div>
+    {% endfor %}
+
+    <br>
+    <input type="submit" value="Edit Pizza Order">
+    <p></p>
+    <p><a href="{% url 'order' %}"><input type="button" value="Back" class="btn btn-info"></a></p>
+
+</form>
+</div>
+ {% endblock %}
+
+
